@@ -71,9 +71,9 @@ pick the 16 GiB memory and make sure to give the virtual machine a name and use 
 
 - # Block icmp traffic on VM2 through NSG
 - go to network security group on the Azure portal
-- click on vm2 security group
-- click on inbound security rules, click add on the top left, and put in the following configurations to block ICMP traffic
-- check back on your Windows 10 VM and look at the traffic on Wireshark and PowerShell, it should say request timed out and the Wireshark traffic should pause
+- click on vm2 security group 
+- click on inbound security rules, click add on the top left, and put in the following configurations to block ICMP traffic (picture 2)
+- check back on your Windows 10 VM and look at the traffic on Wireshark and PowerShell, it should say request timed out and the Wireshark traffic should pause ( picture 3)
 - you can go back and delete the security rule and clean up in the azure portal
   ![image](https://github.com/ali0999109/configure-ad/assets/145396907/d2637340-802c-49ea-8463-bcfcf6ce7a20)
   ![image](https://github.com/ali0999109/configure-ad/assets/145396907/46d62233-f5dc-4560-9cef-ffe1fe140679)
