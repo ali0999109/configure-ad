@@ -1,4 +1,3 @@
-<p align="center">
 <img src="https://i.imgur.com/Ua7udoS.png" alt="Traffic Examination"/>
 </p>
 
@@ -42,7 +41,7 @@ pick the 16 GiB memory and make sure to give the virtual machine a name and use 
 
   ![image](https://github.com/ali0999109/configure-ad/assets/145396907/c2e4e1c2-e8f5-4fe2-b778-28e2d69b1bb5)
 
-  # step 2 connecting to Windows VM1 with RDP
+ # Connecting to Windows VM1 with RDP
   - Go to your virtual machine in the azure portal and click on it
   it should like this
   
@@ -54,7 +53,7 @@ pick the 16 GiB memory and make sure to give the virtual machine a name and use 
   
   ![image](https://github.com/ali0999109/configure-ad/assets/145396907/120040ae-9017-424c-9907-28abb624abb4) 
 
-# Step 3 install Wireshark 
+# install Wireshark on VM1 and ping VM2 through powershell
 - install wireshark through the windows 10 VM, type download wireshark in the browser, click windows installer (64 bits)
 ![image](https://github.com/ali0999109/configure-ad/assets/145396907/d9f7626e-445a-4af7-acb1-57e99bbb3d05)
 
@@ -70,35 +69,35 @@ pick the 16 GiB memory and make sure to give the virtual machine a name and use 
 - Continous Ping type Ping -t in powershell
 - ![image](https://github.com/ali0999109/configure-ad/assets/145396907/dd886743-1cf0-4e48-ad10-6b534392adc9)
 
-- # Step 4 Block icmp traffic on VM2
+- # Block icmp traffic on VM2 through NSG
+- go to network security group on the Azure portal
+- click on vm2 security group
+- click on inbound security rules, click add on the top left, and put in the following configurations to block ICMP traffic
+- check back on your Windows 10 VM and look at the traffic on Wireshark and PowerShell, it should say request timed out and the Wireshark traffic should pause
+- you can go back and delete the security rule and clean up in the azure portal
+  ![image](https://github.com/ali0999109/configure-ad/assets/145396907/d2637340-802c-49ea-8463-bcfcf6ce7a20)
+  ![image](https://github.com/ali0999109/configure-ad/assets/145396907/46d62233-f5dc-4560-9cef-ffe1fe140679)
+  ![image](https://github.com/ali0999109/configure-ad/assets/145396907/7cfc4688-1630-453b-9b86-1ce025097a3c)
+# SSH from VM1 into VM2
+- Filter out wireshark traffic by typing SSH
+- type in SSH, username, and @ the private IP address of VM2 (which was shown previously)
+- click yes and enter the password for VM2
+- type in some Linux commands in PowerShell like ls, pwd, id it will show up in wireshark
+- to stop the SSH connection type in Exit
+- another way to filter out SSH traffic on wireshark is to type tcp.port == 22
+
+![image](https://github.com/ali0999109/configure-ad/assets/145396907/1efe40c0-dacc-47be-a59d-352265b542ae)
+![image](https://github.com/ali0999109/configure-ad/assets/145396907/d7ed723f-5720-456e-9f81-00f0f476e632)
+![image](https://github.com/ali0999109/configure-ad/assets/145396907/1e5f3080-bcad-43b5-9e80-23046ea5ed13)
+![image](https://github.com/ali0999109/configure-ad/assets/145396907/e2250fe5-5336-4c50-9563-62545ef9b3c2)
+
+![image](https://github.com/ali0999109/configure-ad/assets/145396907/61619ab2-e15b-4155-81a5-d212f9eefad7)
+![image](https://github.com/ali0999109/configure-ad/assets/145396907/fa7d99dd-bc7b-49f8-8a3e-e5b267c210a6)
+
+# Observing DNS and DHCP traffic in Wireshark
+- type in ipconfig/renew to observe DHCP traffic (type in dhcp to filter out traffic in Wireshark)
+- type in Nslookup and any website to observe DNS traffic for example google.com ( type in dns to filter out traffic in wireshark)
   
-
-
-
-
-
-
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+  ![image](https://github.com/ali0999109/configure-ad/assets/145396907/092e43e5-29ea-4005-96e3-f6f2dfb5bb0d)
+  
+  ![image](https://github.com/ali0999109/configure-ad/assets/145396907/8c6c7cea-f64c-41a0-a100-754b06f19a29)
